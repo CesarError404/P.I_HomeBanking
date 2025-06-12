@@ -187,7 +187,7 @@ if ($cuenta) {
       <h2>BALKFOX</h2>
     </div>
     <ul>
-      <li><a href="cuentas.php"><i class="fa-solid fa-wallet"></i> Ingresar Dinero</a></li>
+      <li><a href="ingresar_dinero.php"><i class="fa-solid fa-wallet"></i> Ingresar Dinero</a></li>
       <li><a href="transferir.php"><i class="fa-solid fa-right-left"></i> Transferir</a></li>
       <li><a href="pagos_y_servicios.php"><i class="fa-solid fa-file-invoice-dollar"></i> Pagos de servicios</a></li>
       <li><a href="prestamos.php"><i class="fa-solid fa-hand-holding-dollar"></i> Préstamos</a></li>
