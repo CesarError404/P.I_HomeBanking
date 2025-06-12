@@ -98,24 +98,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             animation: slideUp 1s ease;
         }
 
-        /* Agregado: icono persona en círculo */
-        .icon-persona {
-            width: 60px;
-            height: 60px;
-            background-color: #3b82f6;
-            border-radius: 50%;
-            margin: 0 auto 1rem auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 12px rgba(59,130,246,0.5);
-        }
-        .icon-persona svg {
-            fill: white;
-            width: 32px;
-            height: 32px;
-        }
-
         .login-container h2 {
             margin-bottom: 1.5rem;
             color: #1f2937;
@@ -202,12 +184,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <div class="login-container">
-        <div class="icon-persona" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4
-                v2h16v-2c0-2.66-5.33-4-8-4z"/>
-            </svg>
-        </div>
         <h2>Iniciar Sesión</h2>
         <form method="POST" action="">
             <div class="input-group">
