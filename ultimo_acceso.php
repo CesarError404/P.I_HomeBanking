@@ -1,79 +1,108 @@
-<?php session_start(); 
+<?php 
+session_start(); 
 include("conexion.php"); 
 
-$sql = "SELECT U.USUARIO_nombre, U.USUARIO_apellido, L.LOGIN_fecha_y_hora_de_acceso FROM LOGIN L JOIN USUARIO U ON L.LOGIN_idUsuario = U.idUSUARIO ORDER BY L.LOGIN_fecha_y_hora_de_acceso DESC LIMIT 1"; $resultado = $conexion->query($sql); $acceso = $resultado->fetch_assoc(); $nombreCompleto = $acceso["USUARIO_nombre"] . " " . $acceso["USUARIO_apellido"]; $fechaHora = $acceso["LOGIN_fecha_y_hora_de_acceso"]; $fecha = date("d/m/Y", strtotime($fechaHora)); $hora = date("H:i:s", strtotime($fechaHora)); ?> <!DOCTYPE html> <html lang="es"> <head> <meta charset="UTF-8"> <title>Último Acceso</title> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"> <style> * { margin: 0; padding: 0; box-sizing: border-box; }
+$sql = "SELECT U.USUARIO_nombre, U.USUARIO_apellido, L.LOGIN_fecha_y_hora_de_acceso 
+        FROM LOGIN L 
+        JOIN USUARIO U ON L.LOGIN_idUsuario = U.idUSUARIO 
+        ORDER BY L.LOGIN_fecha_y_hora_de_acceso DESC 
+        LIMIT 1"; 
 
-    body {
-        font-family: 'Inter', sans-serif;
-        background: linear-gradient(135deg, #1e3c72, #2a5298);
-        color: #fff;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 50px 20px;
-    }
+$resultado = $conexion->query($sql); 
+$acceso = $resultado->fetch_assoc(); 
 
-    .container {
-        background: white;
-        color: #333;
-        width: 90%;
-        max-width: 600px;
-        padding: 40px;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        text-align: center;
-        animation: fadeIn 1s ease-in;
-    }
+$nombreCompleto = $acceso["USUARIO_nombre"] . " " . $acceso["USUARIO_apellido"]; 
+$fechaHora = $acceso["LOGIN_fecha_y_hora_de_acceso"]; 
+$fecha = date("d/m/Y", strtotime($fechaHora)); 
+$hora = date("H:i:s", strtotime($fechaHora)); 
+?>
 
-    h2 {
-        color: #1a237e;
-        margin-bottom: 30px;
-    }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Último Acceso</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 30px;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+        }
 
-    th, td {
-        border: 1px solid #ddd;
-        padding: 14px;
-        font-size: 16px;
-    }
+        .container {
+            background: white;
+            color: #333;
+            width: 90%;
+            max-width: 600px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            animation: fadeIn 1s ease-in;
+        }
 
-    th {
-        background-color: #3f51b5;
-        color: white;
-        font-weight: 600;
-    }
+        h2 {
+            color: #1a237e;
+            margin-bottom: 30px;
+        }
 
-    tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
 
-    a {
-        display: inline-block;
-        padding: 10px 25px;
-        background-color: #3f51b5;
-        color: white;
-        text-decoration: none;
-        border-radius: 12px;
-        font-weight: 600;
-        transition: background-color 0.3s ease;
-    }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 14px;
+            font-size: 16px;
+        }
 
-    a:hover {
-        background-color: #303f9f;
-    }
+        th {
+            background-color: #3f51b5;
+            color: white;
+            font-weight: 600;
+        }
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(-20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-</style>
-</head> <body> <?php include("sidebar.php"); ?>
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: #3f51b5;
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #303f9f;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Si no usás sidebar.php, podés comentar esta línea -->
+<?php /* include("sidebar.php"); */ ?>
 
 <div class="container">
     <h2>Último acceso al sistema</h2>
@@ -92,7 +121,6 @@ $sql = "SELECT U.USUARIO_nombre, U.USUARIO_apellido, L.LOGIN_fecha_y_hora_de_acc
 
     <a href="menu.php">← Volver al Menú</a>
 </div>
-</body> </html>
 
-
-<?php include("sidebar.php"); ?>
+</body>
+</html>
