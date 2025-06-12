@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Redirige si no está logueado
+// Redirige si no estÃ¡ logueado
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: login.php");
     exit();

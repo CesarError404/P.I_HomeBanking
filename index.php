@@ -1,5 +1,5 @@
 <?php
-session_start();
-session_destroy();
+// Redirige automáticamente al login
 header("Location: login.php");
 exit();
+?>

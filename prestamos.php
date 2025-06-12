@@ -143,6 +143,7 @@ $result = $stmt->get_result();
     </style>
 </head>
 <body>
+    
     <div class="container">
         <h2>Solicitar Nuevo Préstamo</h2>
         <form method="POST" action="prestamos.php">
@@ -187,6 +188,22 @@ $result = $stmt->get_result();
                 <?php endwhile; ?>
             </tbody>
         </table>
+
+        <!-- Botón Volver al Menú -->
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="menu.php" style="
+                display: inline-block;
+                padding: 10px 25px;
+                background-color: #3f51b5;
+                color: white;
+                text-decoration: none;
+                border-radius: 12px;
+                font-weight: 600;
+                transition: background-color 0.3s ease;
+            " onmouseover="this.style.backgroundColor='#303f9f';" onmouseout="this.style.backgroundColor='#3f51b5';">
+                ← Volver al Menú
+            </a>
+        </div>
     </div>
 </body>
 </html>
