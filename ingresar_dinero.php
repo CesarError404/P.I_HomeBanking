@@ -241,7 +241,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <div class="contenido">
     <div class="formulario">
-        <h2><i class="fa-solid fa-coins"></i> Ingreso de Dinero</h2>
+        <h2><i class="fa-solid fa-coins"></i> Cajero Automatico</h2>
         <form method="POST">
             <label>Número de cuenta:</label>
             <input type="number" name="numero_cuenta" required>
