@@ -31,8 +31,11 @@ $sql_datos_cuenta->close();
 
 // Validamos saldo
 if ($saldo_actual < $monto) {
-    die("Saldo insuficiente.");
+    header("Location: pagos_y_servicios.php?error=saldo");
+    exit();
 }
+
+
 
 // 1. Insertamos en la tabla PAGO_DE_SERVICIOS
 $fecha_actual = date("Y-m-d H:i:s");
@@ -84,8 +87,13 @@ $insert_notificacion->execute();
 $insert_notificacion->close();
 
 // Redireccionamos o mostramos éxito
-header("Location: panel.php?mensaje=Pago realizado con éxito");
+// Al final del procesamiento, armar mensaje con datos
+$mensaje = urlencode("Pago realizado: $tipo_servicio por \$$monto. Saldo restante: \$$nuevo_saldo");
+
+// Redireccionar con mensaje
+header("Location: panel.php?mensaje=$mensaje");
 exit();
+
 ?>
 <!DOCTYPE html>
 <html lang="es">

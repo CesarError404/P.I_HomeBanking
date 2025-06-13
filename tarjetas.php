@@ -65,7 +65,7 @@ if (isset($_GET['editar'])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $numero = $_POST['numero'];
     $tipo = $_POST['tipo'];
-    $estado = $_POST['estado'];
+    $estado = isset($_POST['estado']) && trim($_POST['estado']) !== '' ? $_POST['estado'] : 'Activa';
     $fecha_vencimiento = $_POST['fecha_vencimiento'];
 
     if (isset($_POST['editar'])) {
@@ -100,7 +100,6 @@ $stmt->bind_param("i", $id_persona);
 $stmt->execute();
 $resultado = $stmt->get_result();
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>

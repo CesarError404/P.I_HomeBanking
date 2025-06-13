@@ -176,6 +176,14 @@ $resultado_cuentas = $stmt->get_result();
 
     <div class="contenido">
         <h2>Pagar un servicio</h2>
+        <?php if (isset($_GET['error']) && $_GET['error'] === 'saldo'): ?>
+  <div id="alertaSaldo" style="background-color: #fee2e2; color: #b91c1c; padding: 12px 16px; border: 1px solid #fca5a5; border-radius: 8px; margin-bottom: 20px; position: relative;">
+    <strong>⚠ Saldo insuficiente:</strong> No tiene fondos suficientes para realizar este pago.
+    <button onclick="document.getElementById('alertaSaldo').style.display='none'" 
+            style="position: absolute; top: 8px; right: 10px; background: none; border: none; font-size: 18px; cursor: pointer;">×</button>
+  </div>
+<?php endif; ?>
+
         <form method="POST" action="procesar_pago.php">
             <label for="tipo_servicio">Tipo de servicio:</label>
             <input type="text" name="tipo_servicio" id="tipo_servicio" required>
@@ -192,7 +200,7 @@ $resultado_cuentas = $stmt->get_result();
                 <?php } ?>
             </select>
 
-            <input type="submit" value="Generar factura y pagar">
+            <input type="submit" value="Pagar el Servicio">
         </form>
     </div>
 </body>
