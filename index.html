@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Proyecto BALKFOX - HomeBanking</title>
+  <style>
+    :root {
+      --azul-marino: #071c2f;
+      --azul-oscuro: #0f2a45;
+      --azul-profundo: #0c1a30;
+      --blanco: #ffffff;
+      --gris-claro: #e8edf2;
+      --texto: #e0e6ed;
+      --acento: #1d64f2;
+      --acento-light: #4a8cff;
+      --sombra-oscura: rgba(0, 0, 0, 0.6);
+    }
+
+    * {
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--azul-profundo);
+      color: var(--texto);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--azul-marino), var(--azul-oscuro));
+      text-align: center;
+      padding: 3rem 1rem 3rem;
+      position: relative;
+      box-shadow: 0 0 30px var(--acento-light);
+      overflow: visible;
+    }
+
+    header img {
+      height: 100px;
+      animation: slowRotate 20s linear infinite;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 0 5px var(--acento));
+      cursor: pointer;
+      transition: filter 0.3s ease;
+    }
+    header img:hover {
+      filter: drop-shadow(0 0 15px var(--acento-light));
+      animation-play-state: paused;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin: 0.3rem 0;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px var(--acento-light);
+      animation: slideDown 1.2s ease forwards;
+      opacity: 0;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      color: #9bb5d2;
+      font-weight: 600;
+      letter-spacing: 1px;
+      animation: fadeIn 1.8s ease forwards;
+      opacity: 0;
+    }
+
+    .botones-header {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .botones-header a {
+      background-color: var(--acento);
+      color: var(--blanco);
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .botones-header a:hover {
+      background-color: var(--acento-light);
+      transform: scale(1.05);
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+      z-index: 2;
+      position: relative;
+    }
+
+    section {
+      background: linear-gradient(145deg, #122c49, #0d1f3d);
+      margin-bottom: 2.5rem;
+      border-radius: 15px;
+      padding: 2.5rem 2rem;
+      box-shadow:
+        0 0 8px 2px var(--acento-light),
+        inset 0 0 10px 2px var(--azul-oscuro);
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: box-shadow 0.4s ease;
+    }
+    section:hover {
+      box-shadow:
+        0 0 20px 4px var(--acento),
+        inset 0 0 15px 3px var(--acento-light);
+      cursor: default;
+    }
+
+    h2 {
+      color: var(--acento);
+      font-size: 1.9rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      text-shadow: 0 0 8px var(--acento-light);
+      user-select: none;
+    }
+
+    ul {
+      padding-left: 1.8rem;
+      line-height: 1.6;
+    }
+
+    .categoria {
+      margin-top: 1.8rem;
+    }
+
+    .categoria strong {
+      color: var(--texto);
+      font-weight: 800;
+      font-size: 1.15rem;
+      display: inline-block;
+      margin-bottom: 0.7rem;
+      border-left: 4px solid var(--acento);
+      padding-left: 10px;
+      user-select: none;
+    }
+
+    li {
+      margin-bottom: 0.6rem;
+      color: #c8d7e1cc;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.3s ease;
+      cursor: default;
+    }
+    li:hover {
+      color: var(--acento-light);
+      transform: translateX(5px);
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 2.5rem 1rem 3rem;
+      background-color: var(--azul-marino);
+      color: var(--texto);
+      border-top: 1px solid #1d2e3f;
+      box-shadow: inset 0 8px 20px var(--sombra-oscura);
+      user-select: none;
+      line-height: 1.6;
+    }
+
+    .equipo {
+      font-style: italic;
+      margin-top: 1rem;
+      color: #aabacbcc;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideDown {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slowRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      section {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+    }
+
+    @media (max-width: 768px) {
+      header img {
+        height: 80px;
+      }
+      header h1 {
+        font-size: 2.4rem;
+      }
+      section {
+        padding: 2rem 1.5rem;
+      }
+      .categoria strong {
+        font-size: 1rem;
+      }
+      main {
+        margin: 2rem auto;
+      }
+    }
+
+    @media (max-width: 420px) {
+      header h1 {
+        font-size: 1.9rem;
+      }
+      section {
+        padding: 1.5rem 1rem;
+      }
+      li {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="logo.png" alt="Logo BALKFOX" title="BALKFOX HomeBanking Logo" />
+    <h1>Proyecto BALKFOX</h1>
+    <p>Sistema HomeBanking</p>
+
+    <!-- Botones agregados -->
+    <div class="botones-header">
+      <a href="login.php">Inicio de Sesión</a>
+      <a href="registro.php">Registrar Nuevo Usuario</a>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>🎯 Objetivos Principales</h2>
+      <ul>
+        <li>Registrar y administrar usuarios, asegurando acceso individual a sus datos.</li>
+        <li>Proteger información financiera con medidas de seguridad modernas.</li>
+        <li>Facilitar operaciones bancarias como pagos, transferencias y retiros.</li>
+        <li>Controlar préstamos, vencimientos y pagos pendientes.</li>
+        <li>Enviar alertas automáticas por movimientos o vencimientos.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>🛠️ Requerimientos Funcionales</h2>
+
+      <div class="categoria">
+        <strong>1. Autenticación y Seguridad</strong>
+        <ul>
+          <li>1.1 Registro de usuario</li>
+          <li>1.2 Recuperación de credenciales</li>
+        </ul>
+      </div>
+
+      <div class="categoria">
+        <strong>2. Gestión de Cuentas</strong>
+        <ul>
+          <li>2.1 Consulta de saldo y movimientos</li>
+          <li>2.2 Administración de cuentas</li>
+          <li>2.3 Apertura y cierre de cuentas</li>
+        </ul>
+      </div>
+
+      <div class="categoria">
+        <strong>3. Transferencias y Pagos</strong>
+        <ul>
+          <li>3.1 Transferencias entre cuentas propias</li>
+          <li>3.2 Transferencias a terceros</li>
+          <li>3.3 Pagos de servicios</li>
+          <li>3.4 Pagos de tarjetas de crédito</li>
+          <li>3.5 Validación de CBU/alias</li>
+        </ul>
+      </div>
+
+      <div class="categoria">
+        <strong>4. Gestión de Tarjetas</strong>
+        <ul>
+          <li>4.1 Consulta de tarjetas</li>
+          <li>4.2 Solicitud de nuevas tarjetas</li>
+          <li>4.3 Habilitación y bloqueo de tarjetas</li>
+        </ul>
+      </div>
+
+      <div class="categoria">
+        <strong>5. Préstamos y Créditos</strong>
+        <ul>
+          <li>5.1 Solicitud de préstamos</li>
+          <li>5.2 Seguimiento de préstamos</li>
+        </ul>
+      </div>
+
+      <div class="categoria">
+        <strong>6. Notificaciones y Alertas</strong>
+        <ul>
+          <li>6.1 Alertas por movimientos</li>
+          <li>6.2 Avisos de vencimiento</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Equipo de diseño y desarrollo:</strong></p>
+    <p class="equipo" title="Contactos del equipo">
+      Cáceres Facundo Matías (3704324818), Candia César Alberto (3718691099), Román Mario Alfredo (3704623179), Traianon Gustavo Alejandro (3704300512), Vega Franco Agustín (3705036563)
+    </p>
+    <p>&copy; 2025 BALKFOX - Proyecto Académico de HomeBanking</p>
+  </footer>
+
+  <script>
+    // Animar las secciones cuando entren en viewport (scroll reveal)
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('section');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {threshold: 0.1});
+      sections.forEach(section => {
+        observer.observe(section);
+      });
+    });
+  </script>
+
+</body>
+</html>
