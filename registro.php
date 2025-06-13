@@ -41,8 +41,9 @@ function generarAlias($nombre, $apellido, $conexion) {
     return $alias;
 }
 
+$mensaje = "";
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Sanitizar y validar datos
     $nombre = trim($_POST['nombre']);
     $apellido = trim($_POST['apellido']);
     $dni = trim($_POST['dni']);
@@ -50,9 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $correo = trim($_POST['correo']);
     $telefono = trim($_POST['telefono']);
     $contrasena = password_hash($_POST['contrasena'], PASSWORD_DEFAULT);
-    $tipo_cuenta = $_POST['tipo_cuenta']; // nuevo campo
+    $tipo_cuenta = $_POST['tipo_cuenta'];
 
-    // Insertar en USUARIO
     $sql_usuario = "INSERT INTO USUARIO (USUARIO_nombre, USUARIO_apellido, USUARIO_contrasena, USUARIO_correo_direccion)
                     VALUES (?, ?, ?, ?)";
     $stmt_usuario = $conn->prepare($sql_usuario);
@@ -61,14 +61,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($stmt_usuario->execute()) {
         $idUsuario = $stmt_usuario->insert_id;
 
-        // Insertar en PERSONA
         $sql_persona = "INSERT INTO PERSONA (PERSONA_dni, PERSONA_domicilio, PERSONA_telefono, USUARIO_idUSUARIO)
                         VALUES (?, ?, ?, ?)";
         $stmt_persona = $conn->prepare($sql_persona);
         $stmt_persona->bind_param("sssi", $dni, $domicilio, $telefono, $idUsuario);
 
         if ($stmt_persona->execute()) {
-            // Crear cuenta bancaria automáticamente
             $numero_cuenta = generarNumeroCuenta($conn);
             $cbu = generarCBU($conn);
             $alias = generarAlias($nombre, $apellido, $conn);
@@ -85,17 +83,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header("Location: login.php?registro=exitoso");
                 exit();
             } else {
-                echo "Error al crear la cuenta bancaria: " . $conn->error;
+                $mensaje = "Error al crear la cuenta bancaria: " . $conn->error;
             }
 
             $stmt_cuenta->close();
         } else {
-            echo "Error al registrar datos personales: " . $conn->error;
+            $mensaje = "Error al registrar datos personales: " . $conn->error;
         }
 
         $stmt_persona->close();
     } else {
-        echo "Error al crear el usuario: " . $conn->error;
+        $mensaje = "Error al crear el usuario: " . $conn->error;
     }
 
     $stmt_usuario->close();
